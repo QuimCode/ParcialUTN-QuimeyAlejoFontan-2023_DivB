@@ -1,7 +1,8 @@
 from Datos import *
 from Funciones import *
-from Impreciones import imprimir_datos_normalizados
+from Impreciones import *
 from Juego import *
+print(dbz_dict)
 
 print("Menú:")
 print("1. Mostrar diccionario Normalizado")
@@ -16,7 +17,7 @@ while opcion != "7":
     if opcion == "1":
         imprimir_datos_normalizados(dbz_dict)
     elif opcion == "2":
-        contar_personajes_por_raza(dbz_dict)
+        imprimir_cantidad_por_raza(dbz_dict)
     elif opcion == "3":
         result = listar_personajes_por_raza(dbz_dict)
         print(result)

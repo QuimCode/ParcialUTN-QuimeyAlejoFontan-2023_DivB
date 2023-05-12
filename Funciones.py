@@ -44,18 +44,21 @@ from Datos import *
 print(f"----------------------")
 
 def contar_personajes_por_raza(una_lista):
-    conteo = {}
+    razas = {}
     for personaje in una_lista.values():
-        for raza in personaje['raza']:
-            if raza not in conteo:
-                conteo[raza] = 1
+        if 'raza' in personaje:
+            if isinstance(personaje['raza'], list):
+                for raza in personaje['raza']:
+                    raza_normalizada = normalizar_raza(raza)
+                    if raza_normalizada not in razas:
+                        razas[raza_normalizada] = 0
+                    razas[raza_normalizada] += 1
             else:
-                conteo[raza] += 1
-
-    print("\nConteo por raza:")
-    for raza, cantidad in conteo.items():
-        print(f"\nLa raza es {raza}:  Contiene {cantidad} personajes.")
-    return conteo
+                raza_normalizada = normalizar_raza(personaje['raza'])
+                if raza_normalizada not in razas:
+                    razas[raza_normalizada] = 0
+                razas[raza_normalizada] += 1
+    return razas
 
 print(f"----------------------")
 #---------------------------------------------------------------------------------------------------------#
@@ -65,13 +68,14 @@ def listar_personajes_por_raza(una_lista):
 
     for personaje in una_lista.values():
         for raza in personaje['raza']:
-            if raza not in personajes_por_raza:
-                personajes_por_raza[raza] = []
-            personajes_por_raza[raza].append((personaje['nombre'], personaje['poder_de_ataque']))
+            raza_normalizada = raza.lower()
+            if raza_normalizada not in personajes_por_raza:
+                personajes_por_raza[raza_normalizada] = []
+            personajes_por_raza[raza_normalizada].append((personaje['nombre'], personaje['poder_de_ataque']))
 
     output = ""
     for raza, personajes in personajes_por_raza.items():
-        output += f"\nTipo de raza: {raza}\n"
+        output += f"\nTipo de raza: {raza.capitalize()}\n"
         for personaje in personajes:
             output += f"- {personaje[0]}: {personaje[1]}\n"
 

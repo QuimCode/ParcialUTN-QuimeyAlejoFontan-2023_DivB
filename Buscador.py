@@ -54,5 +54,10 @@ def guardar_json(una_lista):
         json.dump(personajes_cumplen, archivo)
     
     print(f"Se guardó el archivo {nombre_archivo} con los personajes que cumplen con la búsqueda.")
+    return(nombre_archivo)
 
 guardar_json(dbz_dict)
+
+# def imprimir_js(dato):
+#     with open("data.json") as archivo:
+#         informacion = json.load()
